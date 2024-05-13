@@ -1,15 +1,28 @@
 
+
 const icon = document.getElementById("search");
 const search_input = document.getElementById('search-input');
 const selector_manid = document.getElementById('select_manid')
 const select_model = document.getElementsByClassName('select_model')
 const select_type = document.getElementById('select_type')
 const submit_button = document.getElementById('submit_button')
+const menu_bar = document.getElementById('menu')
+const nav = document.getElementById('nav')
+const x = document.getElementById('x')
+const CarList = document.getElementById('CarList')
+
+
 let manidopt = true
 let carModelList
 let AllData
+let ShowCarList
 
-
+x.addEventListener('click', () => {
+    nav.classList.remove('nav_menu')
+})
+menu_bar.addEventListener('click', () => {
+    nav.classList.add('nav_menu')
+})
 
 
 selector_manid.addEventListener('change', () => {
@@ -38,10 +51,13 @@ const fetchBrendList = async () => {
 const fetchManId = async () => {
     const res = await fetch(`https://api2.myauto.ge/ka/getManModels?man_id=` + selector_manid.value);
     let data = await res.json();
+    console.log(data)
+    AllData = await data.data
     select_model[0].innerHTML = '';
-    AllData = data.data
+    console.log(data)
 
-    data.data.forEach((item) => {
+
+    data.data.map((item) => {
         let optionBrend = item.model_name;
         const option = document.createElement('option');
         option.value = item.model_id;
@@ -53,17 +69,17 @@ const fetchManId = async () => {
 const submitfetch = async () => {
     console.log(AllData)
     console.log(selector_manid.value, select_model[0].value, select_type.value)
-    const apiUrl = `https://api2.myauto.ge/ka/products`;
 
     try {
         const response = await axios.get('https://api2.myauto.ge/ka/products', {
             params: {
-                Mans: `${selector_manid.value}${select_model[0].value}`,
-                ForRent: select_type.value == 1 ? "0" : "1",
+                Mans: `${selector_manid.value}.${select_model[0].value}`,
+                ForRent: select_type.value == 0 ? "1" : "0",
             },
         });
 
-        console.log(response.data);
+        ShowCarList = response.data.data.items
+        FetchCarList()
     } catch (error) {
         console.error('Error fetching data:', error);
     }
@@ -79,6 +95,19 @@ const setselector = () => {
     })
 }
 
+const FetchCarList = () => {
+    if (ShowCarList) {
+        ShowCarList.map((item) => {
+            console.log(item)
+            let div = document.createElement('div')
+            let img = document.createElement('img')
+            let src = `https://static.my.ge/myauto/photos/${item.photo}/thumbs/${ProductId}_1.jpg?v=${Var}`
+            img.src = { src }
+            div.appendChild(img)
+        }
+        )
+    }
+}
 
 
 fetchBrendList()
