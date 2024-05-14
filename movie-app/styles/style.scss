@@ -1,0 +1,456 @@
+@use "positions" as pos;
+@import url('https://fonts.googleapis.com/css2?family=Freeman&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+$primary-red : rgb(215, 70, 70);
+
+@mixin xl1400 {
+    @media screen and (max-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin lg {
+    @media screen and (max-width: 926px) {
+        @content;
+    }
+}
+
+@mixin md {
+    @media screen and (max-width: 720px) {
+        @content;
+    }
+}
+
+@mixin xmd {
+    @media screen and (max-width: 510px) {
+        @content;
+    }
+}
+
+@mixin sm {
+    @media screen and (max-width: 378px) {
+        @content;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Red Rose", serif;
+    list-style: none;
+    text-decoration: none;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+}
+
+.header {
+    @include pos.center;
+    width: 100%;
+    height: 68px;
+    background-color: white;
+    padding: 0px 50px;
+    justify-content: space-between;
+
+    @include xmd {
+        padding: 0px 10px;
+    }
+
+    img {
+        width: 50px;
+        height: 50px;
+    }
+
+    #menu {
+        display: none;
+
+        @include md {
+            display: block;
+            margin-right: 10px;
+        }
+    }
+
+    #cart {
+        @include md {
+            margin-right: 30px;
+        }
+    }
+
+    .icon_list {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+
+    }
+
+    div {
+        position: relative;
+        @include pos.center;
+
+        i {
+            right: 10px;
+            cursor: pointer;
+        }
+
+        input {
+            position: absolute;
+            right: 0;
+            outline: none;
+            height: 35px;
+            border: none;
+            border-bottom: 1px solid black;
+            padding-left: 5px;
+            width: 0px;
+            opacity: 0;
+        }
+    }
+}
+
+.nav_menu {
+    display: block;
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background-color: rgb(255, 255, 255);
+    animation: appear 1s;
+
+    #x {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        display: block;
+        z-index: 1000;
+    }
+
+    @include pos.center;
+
+    ul {
+        flex-direction: column;
+        text-align: left;
+        color: black;
+
+        li {
+            font-size: 20px;
+            text-align: left;
+
+            a {
+                color: black
+            }
+        }
+    }
+}
+
+nav {
+    @include pos.center;
+
+    @include md {
+        display: none
+    }
+
+    #x {
+        display: none;
+    }
+
+    ul {
+        @include pos.center;
+        justify-content: space-between;
+        gap: 25px;
+        list-style: none;
+        font-size: 16px;
+        color: black;
+
+        li {
+            cursor: pointer;
+            transition: .3s ease-in-out;
+
+            a {
+                color: #000;
+            }
+
+            &:hover {
+                color: rgb(215, 70, 70);
+            }
+        }
+    }
+}
+
+.opened {
+    animation: right-to-left 2s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.closed {
+    animation: left-to-right 2s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.after-header {
+    width: 100%;
+    height: 40%;
+    background-color: white;
+    @include pos.center;
+    gap: 5px;
+    flex-direction: column;
+
+    @include xmd {
+        padding-top: 30px;
+        height: 50%;
+    }
+
+    p {
+        font-size: 31px;
+        font-family: "Ubuntu", sans-serif;
+
+        @include lg {
+            font-size: 25px;
+        }
+
+        @include md {
+            font-size: 17px;
+        }
+
+        @include sm {
+            font-size: 13px;
+        }
+    }
+
+    h1 {
+        font-family: "Freeman", sans-serif;
+        color: rgb(215, 70, 70);
+        font-size: 90px;
+
+        @include lg {
+            font-size: 65px;
+        }
+
+        @include md {
+            font-size: 50px;
+        }
+
+        @include xmd {
+            font-size: 35px;
+        }
+
+        @include sm {
+            font-size: 28px;
+        }
+    }
+
+    .search_bar {
+        width: 60%;
+        height: 70px;
+        border-radius: 15px;
+        margin-top: 35px;
+        display: flex;
+        overflow: hidden;
+        border: 1px solid $primary-red;
+
+        @include xl1400 {
+            width: 80%;
+        }
+
+        @include md {
+            width: 90%;
+        }
+
+        @include xmd {
+            flex-direction: column;
+            height: fit-content;
+        }
+
+
+
+        select,
+        input,
+        button {
+            width: 25%;
+            outline: none;
+            border: none;
+            padding: 0px 10px;
+            text-align: left;
+
+            @include xl1400 {
+                font-size: 11px;
+            }
+
+            @include md {
+                width: 30%;
+            }
+
+            @include xmd {
+                height: 100px;
+                width: 100%;
+            }
+        }
+
+        button {
+            background-color: $primary-red;
+            color: white;
+            font-size: 14px;
+            gap: 10px;
+            transition: .2s ease-in;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(215, 70, 70, 0.8933);
+            }
+
+            h2 {
+                @include md {
+                    display: none;
+                }
+
+                @include xmd {
+                    display: block
+                }
+            }
+
+            @include pos.center;
+
+            i {
+                font-size: 13px;
+            }
+
+            @include md {
+                width: 10%;
+            }
+
+            @include xmd {
+                width: 100%;
+            }
+        }
+
+        select {
+            font-size: 1.15rem;
+            padding-left: 40px;
+            padding-right: 15px;
+            color: #000;
+            cursor: pointer;
+        }
+
+        #option_null {
+            display: none;
+        }
+
+        .select_model {
+            pointer-events: none;
+            background-color: rgba(128, 128, 128, 0.23);
+            opacity: .7;
+        }
+
+        .enabled_select {
+            pointer-events: all;
+            background-color: transparent;
+            opacity: 1;
+        }
+    }
+}
+
+
+#CarList {
+    margin-top: 50px;
+    ;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px 20px;
+    gap: 20px;
+    @include pos.center;
+
+    .carModel {
+        width: 500px;
+        height: 420px;
+        background-color: rgb(88, 88, 88);
+        border-radius: 10px;
+        overflow: hidden;
+        color: white;
+        position: relative;
+        pointer-events: none;
+
+        button {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            width: 100px;
+            height: 30px;
+            border-radius: 30px;
+            background-color: white;
+            color: black;
+            border: none;
+        }
+
+        .cont {
+            width: 100%;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0px 10px;
+        }
+
+        h6,
+        h2 {
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+
+        h6 {
+            font-size: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        img {
+            width: 100%;
+            height: 60%;
+        }
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes right-to-left {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        width: 250px;
+    }
+}
+
+@keyframes left-to-right {
+    0% {
+        opacity: 1;
+        width: 250px;
+    }
+
+    100% {
+        opacity: 0;
+        width: 0;
+    }
+}

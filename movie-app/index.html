@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/2a95394bb5.js" crossorigin="anonymous"></script>
+  <title>Vite App</title>
+</head>
+
+<body>
+  <section id="main">
+    <header class="header">
+      <div class="logo_box">
+        <img src="photos/logo.png" alt="logo">
+      </div>
+      <nav class="nav_bar" id="nav">
+        <i class="fa-solid fa-xmark" id="x"></i>
+        <ul>
+          <li><a onclick="route()" href="/">Home</a></li>
+          <li><a onclick="route()" href="/products"> products</a></li>
+          <li><a onclick="route()" href="/contact">Contact</a></li>
+          <li><a onclick="route()" href="/about">About</a></li>
+        </ul>
+      </nav>
+      <div class="icon_list">
+
+        <div>
+          <input type="text" id="search-input">
+          <i id="search" class="fa-solid fa-magnifying-glass" style="color: #000000;"></i>
+        </div>
+        <i class="fa-solid fa-cart-shopping" id="cart" style="color: #000000;"></i>
+
+        <i class="fa-solid fa-bars" id="menu"></i>
+      </div>
+    </header>
+
+    <div id="root">
+
+    </div>
+  </section>
+  <script type="module" src="/index.js"></script>
+  <script type="module" src="/main.js"></script>
+  <script type="module" src="/route.js"></script>
+</body>
+
+</html>
