@@ -326,6 +326,10 @@ nav ul li:hover {
   opacity: 1;
 }
 
+option {
+  cursor: pointer;
+}
+
 #CarList {
   margin-top: 50px;
   width: 100%;
@@ -339,14 +343,18 @@ nav ul li:hover {
   justify-content: center;
 }
 #CarList .carModel {
-  width: 500px;
-  height: 420px;
-  background-color: rgb(88, 88, 88);
+  width: 350px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  background-color: rgba(251, 250, 250, 0.753);
   border-radius: 10px;
-  overflow: hidden;
-  color: white;
+  color: rgb(215, 70, 70);
   position: relative;
-  pointer-events: none;
+  border: 1px solid red;
+  box-shadow: 2px 1px 10px solid red;
 }
 #CarList .carModel button {
   position: absolute;
@@ -357,7 +365,8 @@ nav ul li:hover {
   border-radius: 30px;
   background-color: white;
   color: black;
-  border: none;
+  border: 0.2px solid red;
+  cursor: pointer;
 }
 #CarList .carModel .cont {
   width: 100%;
@@ -367,22 +376,47 @@ nav ul li:hover {
   justify-content: space-between;
   padding: 0px 10px;
 }
-#CarList .carModel h6,
-#CarList .carModel h2 {
+#CarList .carModel h6 {
   margin-left: 10px;
   margin-top: 10px;
+}
+#CarList .carModel h2 {
+  margin-top: 15px;
+}
+#CarList .carModel .info {
+  position: absolute;
+  bottom: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 10px;
+  gap: 10px;
 }
 #CarList .carModel h6 {
   font-size: 20px;
 }
-#CarList .carModel h2 {
-  font-size: 20px;
-  position: absolute;
-  bottom: 10px;
+#CarList .carModel h3 {
+  font-size: 14px;
+}
+#CarList .carModel h4 {
+  font-size: 13px;
+}
+@media screen and (max-width: 378px) {
+  #CarList .carModel h4 {
+    font-size: 10px;
+  }
 }
 #CarList .carModel img {
-  width: 100%;
-  height: 60%;
+  pointer-events: none;
+  width: 100.7%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: 1;
+  top: 0;
+  height: 61%;
+  margin-top: -1px;
 }
 
 @keyframes appear {

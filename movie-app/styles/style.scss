@@ -353,6 +353,10 @@ nav {
 }
 
 
+option {
+    cursor: pointer;
+}
+
 #CarList {
     margin-top: 50px;
     ;
@@ -365,14 +369,18 @@ nav {
     @include pos.center;
 
     .carModel {
-        width: 500px;
-        height: 420px;
-        background-color: rgb(88, 88, 88);
+        width: 350px;
+        height: 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+        background-color: rgba(251, 250, 250, 0.753);
         border-radius: 10px;
-        overflow: hidden;
-        color: white;
+        color: $primary-red;
         position: relative;
-        pointer-events: none;
+        border: 1px solid red;
+        box-shadow: 2px 1px 10px solid red;
 
         button {
             position: absolute;
@@ -383,7 +391,8 @@ nav {
             border-radius: 30px;
             background-color: white;
             color: black;
-            border: none;
+            border: .2px solid red;
+            cursor: pointer;
         }
 
         .cont {
@@ -395,26 +404,52 @@ nav {
             padding: 0px 10px;
         }
 
-        h6,
-        h2 {
+        h6 {
             margin-left: 10px;
             margin-top: 10px;
         }
 
+        h2 {
+            margin-top: 15px;
+        }
+
+
+        .info {
+            position: absolute;
+            bottom: 10px;
+            width: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: 10px;
+            gap: 10px;
+        }
 
         h6 {
             font-size: 20px;
         }
 
-        h2 {
-            font-size: 20px;
-            position: absolute;
-            bottom: 10px;
+        h3 {
+            font-size: 14px;
+        }
+
+        h4 {
+            font-size: 13px;
+
+            @include sm {
+                font-size: 10px;
+            }
         }
 
         img {
-            width: 100%;
-            height: 60%;
+            pointer-events: none;
+            width: 100.7%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            z-index: 1;
+            top: 0;
+            height: 61%;
+            margin-top: -1px;
         }
     }
 }

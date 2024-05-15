@@ -1,14 +1,17 @@
-const route = (event) => {
+import About from "./scripts/pages/About";
+import Contacts from "./scripts/pages/contact";
+import mainpage, { fetchBrendList } from "./scripts/pages/MainPage";
+import Products from "./scripts/pages/Products";
+
+const route = (event, destiny) => {
     event = event || window.event;
     event?.preventDefault();
     window.history.pushState({}, "", event.target.href);
     handleLocation();
+    if (destiny == "home") {
+        fetchBrendList()
+    }
 };
-
-import About from "./scripts/pages/About";
-import Contacts from "./scripts/pages/contact";
-import mainpage from "./scripts/pages/MainPage";
-import Products from "./scripts/pages/Products";
 
 const routes = {
     404: "/pages/404.html",
@@ -33,4 +36,6 @@ const handleLocation = async () => {
 window.onpopstate = handleLocation;
 (window).route = route;
 handleLocation()
+
+window.addEventListener('popstate', console.log('sdawd'))
 export default handleLocation
