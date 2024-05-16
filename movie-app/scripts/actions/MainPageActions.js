@@ -14,10 +14,8 @@ export const FetchCarList = ({ carlist, alldata, models }) => {
                 let date = document.createElement('h4')
                 let text
                 alldata?.map((item) => {
-                    console.log(item)
                     if (item.model_id == carlist[0].model_id) {
                         text = item.model_name
-                        console.log(item.model_name)
                     }
                 })
                 models?.map((item) => {

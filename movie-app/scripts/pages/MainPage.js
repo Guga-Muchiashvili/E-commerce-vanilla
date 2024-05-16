@@ -1,5 +1,5 @@
-import axios from "axios";
-import { FetchCarList } from "../actions/MainPageActions";
+import modulphoto from '../../photos/bg.jpg';
+import { fetchBrends, fetchModels, submitfetch } from "../actions/Fetch";
 
 const mainpage = `
     <div class="after-header" id="aft">
@@ -22,6 +22,12 @@ const mainpage = `
                 <h2>Find Car</h2>
             </button>
         </div>
+    </div>
+    <div id="modal_photo">
+    <div id="overlay">
+    <h1>See every car</h1>
+    <button><a href="/products">Products</a></button>
+    </div>
     </div>
     <div id="CarList">
     </div>`;
@@ -47,8 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
         sel_model[0].classList.add('enabled_select');
     });
 
-    sum_button?.addEventListener('click', () => {
-        submitfetch();
+    sum_button?.addEventListener('click', async () => {
+         submitfetch();
+        setTimeout(() => {
+            window.scrollTo({
+                top : 800
+            })
+        },1200)
     });
 });
 
@@ -76,11 +87,9 @@ const fetchManId = async () => {
     try {
         sel_model[0].innerHTML = ""
         let manid = document.getElementById('select_manid')
-        const res = await fetch(`https://api2.myauto.ge/ka/getManModels?man_id=` + manid.value);
-        const data = await res.json();
-        AllData = data.data;
+        AllData = await fetchModels(manid)
         sel_model[0].innerHTML = '';
-        data.data.forEach((item) => {
+        AllData.forEach((item) => {
             let optionBrend = item.model_name;
             const option = document.createElement('option');
             option.value = item.model_id;
@@ -92,40 +101,14 @@ const fetchManId = async () => {
 };
 
 
-const submitfetch = async () => {
-    try {
-        let response
-        if (sel_manid.value == '' || sel_model[0].value == '' || sel_type.value == '') return window.alert('you have to fill every field')
-        else {
-            response = await axios.get('https://api2.myauto.ge/ka/products', {
-                params: {
-                    Mans: `${sel_manid.value}.${sel_model[0].value}`,
-                    ForRent: sel_type.value == 0 ? "0" : "1",
-                },
-            })
-        }
-
-        ShowCarList = response.data.data.items;
-        FetchCarList({ carlist: ShowCarList, alldata: AllData, models: carModelList })
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-};
+ 
 
 const setselector = () => {
-    if (sel_manid && sel_model) {
-        let input = document.getElementById('select_manid')
-        let byn = document.getElementById('submit_button')
-        input?.addEventListener('change', () => {
-            fetchManId();
-            sel_model[0].classList.add('enabled_select');
-        });
-
-        byn?.addEventListener('click', () => {
-            submitfetch();
-        });
-    }
-
+    let input = document.getElementById('select_manid');
+    let byn = document.getElementById('submit_button');
+    let manidi = document.getElementById('select_manid');
+    let wait = true; // Define wait as true or false based on your requirements
+    
     if (carModelList && carModelList.length > 0) {
         let input = document.querySelector("#select_manid");
         carModelList.forEach((item) => {
@@ -134,6 +117,19 @@ const setselector = () => {
             option.value = item.man_id;
             option.textContent = optionBrend;
             input?.appendChild(option);
+        });
+    
+        input?.addEventListener('change', async () => {
+            await fetchManId();
+            sel_model[0].classList.add('enabled_select');
+        });
+    
+        byn?.addEventListener('click', async () => {
+            if (wait) {
+                await submitfetch(manidi, sel_model, sel_type);
+                let txt = tempElement.getElementsByClassName('head')[0]
+                txt?.classList.add('apr')
+            }
         });
     } else {
         console.log('No brand data available.');

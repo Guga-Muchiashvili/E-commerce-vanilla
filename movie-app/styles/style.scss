@@ -33,6 +33,12 @@ $primary-red : rgb(215, 70, 70);
     }
 }
 
+#root{
+    height: fit-content;
+}
+html{
+    scroll-behavior: smooth;
+}
 * {
     margin: 0;
     padding: 0;
@@ -171,6 +177,10 @@ nav {
 
             a {
                 color: #000;
+                transition: .2s ease-in;
+                &:hover{
+                    color: $primary-red;
+                }
             }
 
             &:hover {
@@ -358,102 +368,313 @@ option {
 }
 
 #CarList {
-    margin-top: 50px;
-    ;
+    position: relative;
+    margin-top: 50px;;
     width: 100%;
-    min-height: 100%;
+    height: 0px;
     display: flex;
     flex-wrap: wrap;
-    padding: 50px 20px;
+    padding: 0px 20px;
+    padding-bottom: 50px;
     gap: 20px;
     @include pos.center;
+}
 
-    .carModel {
-        width: 350px;
-        height: 320px;
+.carModel {
+    width: 350px;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    background-color: rgba(251, 250, 250, 0.753);
+    border-radius: 10px;
+    color: $primary-red;
+    position: relative;
+    border: 1px solid red;
+    box-shadow: 2px 1px 10px solid red;
+
+    button {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        width: 100px;
+        height: 30px;
+        border-radius: 30px;
+        background-color: white;
+        color: black;
+        border: .2px solid red;
+        cursor: pointer;
+
+    }
+
+
+    .cont {
+        width: 100%;
+        height: 30px;
         display: flex;
-        flex-direction: column;
         align-items: center;
-        text-align: left;
-        background-color: rgba(251, 250, 250, 0.753);
-        border-radius: 10px;
-        color: $primary-red;
-        position: relative;
-        border: 1px solid red;
-        box-shadow: 2px 1px 10px solid red;
+        justify-content: space-between;
+        padding: 0px 10px;
+    }
 
-        button {
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
-            width: 100px;
-            height: 30px;
-            border-radius: 30px;
-            background-color: white;
-            color: black;
-            border: .2px solid red;
-            cursor: pointer;
+    h6 {
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+    h2 {
+        margin-top: 15px;
+    }
+
+
+    .info {
+        position: absolute;
+        bottom: 10px;
+        width: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        left: 10px;
+        gap: 10px;
+    }
+
+    h6 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 14px;
+    }
+
+    h4 {
+        font-size: 13px;
+
+        @include sm {
+            font-size: 10px;
         }
+    }
 
-        .cont {
-            width: 100%;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0px 10px;
-        }
-
-        h6 {
-            margin-left: 10px;
-            margin-top: 10px;
-        }
-
-        h2 {
-            margin-top: 15px;
-        }
-
-
-        .info {
-            position: absolute;
-            bottom: 10px;
-            width: fit-content;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            left: 10px;
-            gap: 10px;
-        }
-
-        h6 {
-            font-size: 20px;
-        }
-
-        h3 {
-            font-size: 14px;
-        }
-
-        h4 {
-            font-size: 13px;
-
-            @include sm {
-                font-size: 10px;
-            }
-        }
-
-        img {
-            pointer-events: none;
-            width: 100.7%;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            z-index: 1;
-            top: 0;
-            height: 61%;
-            margin-top: -1px;
-        }
+    img {
+        pointer-events: none;
+        width: 100.7%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        z-index: 1;
+        top: 0;
+        height: 61%;
+        margin-top: -1px;
     }
 }
 
+.ProductPage{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    padding: 20px 100px;
+}
+#list{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 50px;
+}
+
+.btnnext{
+    font-size: 30px;
+    font-family: sans-serif;
+    border-radius: 15px;
+    height: 60px;
+    cursor: pointer;
+    width: 100%;
+    background-color: $primary-red;
+    color: white;
+    border: none;
+    display: none;
+}
+
+.donebtn{
+    display: block;
+}
+.ProductPage{
+    width: 100%;
+    min-height: 100vh;
+}
+
+.scrl{
+    display: none;
+}
+
+#scrl{
+    display: block;
+    background-color: $primary-red;
+    width: 50px;
+    padding: 20px;
+    @include pos.center;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    height: 50px;
+    font-size: 30px;
+    font-weight: 900;
+    right: 20px;
+    bottom: 25px;
+    cursor: pointer;
+    transition: .3s ease;
+    position: fixed;
+    @include md{
+        right: 20px;
+    }
+    &:hover{
+        background-color: rgb(205, 49, 49);
+    }
+}
+#overlay{
+    width: 100%;
+    height: 100%;
+    background-color: #0000007b;
+    position: absolute;
+    top: 0;
+    left: 0;
+    @include pos.center;
+    color: white;
+    font-size: 40px;
+    gap: 20px;
+
+    @include md{
+        font-size: 20px;
+    }
+
+    @include sm{
+        font-size: 15px;
+    }
+
+    button{
+        background-color: transparent;
+        border: none;
+        outline: none;
+        font-size: 60px;
+        text-decoration: underline;
+        color: $primary-red;
+        font-weight: 900;
+        cursor: pointer;
+        a{
+            color: $primary-red;
+        }
+        @include md{
+            font-size: 30px;
+        }
+        @include sm{
+            font-size: 20px;
+        }
+    }
+}
+#modal_photo{
+    background-image: url('../photos/bg.jpg'); 
+    z-index: 2;
+    position: relative;
+    margin-top: 70px;
+    width: 100%;
+    height: 500px;
+    background-size: cover; 
+    background-position: center; 
+    object-fit: contain;
+    background-attachment: fixed;
+    @include md{
+        height: 300px;
+    }
+}
+.loading {
+    transform: rotateZ(45deg);
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    perspective: 1000px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    color: #ca2e2e;
+    p{
+        transform: translateY(80px);
+      }
+  }
+
+    .loading:before,
+    .loading:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: inherit;
+      height: inherit;
+      border-radius: 50%;
+      transform: rotateX(70deg);
+      animation: 1s spin linear infinite;
+    }
+    .loading:after {
+      color: #110805;
+      transform: rotateY(70deg);
+      animation-delay: .4s;
+    }
+
+  @keyframes rotate {
+    0% {
+      transform: translate(-50%, -50%) rotateZ(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotateZ(360deg);
+    }
+  }
+
+  @keyframes rotateccw {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(-360deg);
+    }
+  }
+
+  @keyframes spin {
+    0%,
+    100% {
+      box-shadow: .2em 0px 0 0px currentcolor;
+    }
+    12% {
+      box-shadow: .2em .2em 0 0 currentcolor;
+    }
+    25% {
+      box-shadow: 0 .2em 0 0px currentcolor;
+    }
+    37% {
+      box-shadow: -.2em .2em 0 0 currentcolor;
+    }
+    50% {
+      box-shadow: -.2em 0 0 0 currentcolor;
+    }
+    62% {
+      box-shadow: -.2em -.2em 0 0 currentcolor;
+    }
+    75% {
+      box-shadow: 0px -.2em 0 0 currentcolor;
+    }
+    87% {
+      box-shadow: .2em -.2em 0 0 currentcolor;
+    }
+  }
+#loaded {
+    display: none;
+}
 @keyframes appear {
     0% {
         opacity: 0;

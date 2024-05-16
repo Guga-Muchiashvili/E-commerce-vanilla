@@ -9,7 +9,6 @@ const x = document.getElementById('x')
 const CarList = document.getElementById('CarList')
 
 
-let manidopt = true
 
 x.addEventListener('click', () => {
     nav.classList.remove('nav_menu')

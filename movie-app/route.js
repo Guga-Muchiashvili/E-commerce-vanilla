@@ -1,16 +1,13 @@
 import About from "./scripts/pages/About";
 import Contacts from "./scripts/pages/contact";
 import mainpage, { fetchBrendList } from "./scripts/pages/MainPage";
-import Products from "./scripts/pages/Products";
+import Products, { Productsfetch } from "./scripts/pages/Products";
 
 const route = (event, destiny) => {
     event = event || window.event;
     event?.preventDefault();
     window.history.pushState({}, "", event.target.href);
     handleLocation();
-    if (destiny == "home") {
-        fetchBrendList()
-    }
 };
 
 const routes = {
@@ -21,7 +18,6 @@ const routes = {
     "/contact": Contacts,
 };
 
-console.log(About)
 const handleLocation = async () => {
     const path = window.location.pathname;
 
@@ -31,11 +27,16 @@ const handleLocation = async () => {
     if (mainPageElement) {
         mainPageElement.innerHTML = routeUrl;
     }
+    if(routePath == '/'){
+        fetchBrendList()
+    }
+    if(routePath == '/products'){
+        Productsfetch()
+    }
 };
 
 window.onpopstate = handleLocation;
 (window).route = route;
 handleLocation()
 
-window.addEventListener('popstate', console.log('sdawd'))
 export default handleLocation
