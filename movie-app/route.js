@@ -1,6 +1,7 @@
 import About from "./scripts/pages/About";
 import Contacts from "./scripts/pages/contact";
 import mainpage, { fetchBrendList } from "./scripts/pages/MainPage";
+import {getCurrentItem} from "./scripts/pages/CarId";
 import Products, { Productsfetch } from "./scripts/pages/Products";
 
 const route = (event, destiny) => {
@@ -20,23 +21,31 @@ const routes = {
 
 const handleLocation = async () => {
     const path = window.location.pathname;
-
     const routePath = path || "/";
-    const routeUrl = routes[routePath] || routes[404];
+    let routeUrl;
     const mainPageElement = document.getElementById("root");
+    console.log(path)
+    if (path.includes('.') && path !== '/') {
+        getCurrentItem()
+        return mainPageElement.innerHTML = Card; 
+    }
+    if (path === '/') {
+        mainPageElement.innerHTML = mainpage;
+        fetchBrendList(); 
+        return; 
+    } else {
+        routeUrl = routes[routePath] || routes[404];
+    }
     if (mainPageElement) {
         mainPageElement.innerHTML = routeUrl;
     }
-    if(routePath == '/'){
-        fetchBrendList()
-    }
-    if(routePath == '/products'){
-        Productsfetch()
+    if (routePath === '/products') {
+        Productsfetch();
     }
 };
 
 window.onpopstate = handleLocation;
-(window).route = route;
-handleLocation()
+window.route = route;
+handleLocation();
 
-export default handleLocation
+export default handleLocation;

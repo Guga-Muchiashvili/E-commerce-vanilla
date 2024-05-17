@@ -1,11 +1,16 @@
 import axios from "axios";
 import { fetchBrends, fetchModels } from "../actions/Fetch";
+import { getCurrentItem } from "./CarId";
 
 
 let loading = true
 
 const Products = `
     <div class="ProductPage">
+    <div class="productimg">
+    <div id="overlay"></div>
+    <h1>Find best car for you</h1>
+    </div>
         ${loading ? '<div class="loading"><p>...Loading</p></div>' : ''}
         <div id="list">
         </div>
@@ -51,6 +56,7 @@ export const Productsfetch = async (Page) => {
             }
         });
         data = await res.data.data.items;
+
         if(!data) page = 1
         await Promise.all(data.map(async (item, i) => {
             let xs = await fetchModels(String(item.man_id));
@@ -58,7 +64,6 @@ export const Productsfetch = async (Page) => {
                 mods.push(xs[i]);
             }
         }))
-        console.log(mods); 
     } catch (error) {
         console.error('Error fetching products:', error);
     }
@@ -77,25 +82,41 @@ export const Productsfetch = async (Page) => {
                     let cont = document.createElement('div')
                     let date = document.createElement('h4')
                     let text
+                    let icon = document.createElement('i')
+                    let a = document.createElement('a')
+                    a.setAttribute('href', `${String(item.man_id + '.' + item.model_id + "." + item.car_id)}`)
+                    icon.classList.add('fa-solid')
+                    icon.classList.add('fa-eye')
+                    let views = document.createElement('h5')
+                    views.innerText = item.views
+                    console.log(icon)
                     mods[i]?.model_name ?  text = mods[i]?.model_name : text = 'unknown'
                     
                     date.innerText = item.order_date.split(' ')[0]
                     h2.innerText = text
-                    button.innerText = "view more"
-                    price.innerText = item.price_usd + "$"
+                    price.innerText = Math.round(item.price_usd) + "$"
                     user.innerText = item.client_name
+                    a.innerHTML = "view more"
                     cont.classList.add('cont')
                     let src = `https://static.my.ge/myauto/photos/${item.photo}/thumbs/${item.car_id}_1.jpg?v=${item.photo_ver}`;
                     img.src = src;
                     div.classList.add('carModel')
                     inf.classList.add('info')
+
+                    button.addEventListener('click', () => {
+                        route(event)
+                        getCurrentItem(item)
+                    })
+                    button.appendChild(a)
                     cont.appendChild(h2)
                     inf.appendChild(user)
-                    inf.appendChild(date)
+                    div.appendChild(date)
                     cont.appendChild(price)
                     div.append(inf)
+                    div.appendChild(icon)
                     div.appendChild(button)
                     div.appendChild(img);
+                    div.append(views)
                     div.appendChild(cont);
                     document.getElementById('list')?.appendChild(div)
                 })

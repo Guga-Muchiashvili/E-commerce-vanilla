@@ -1,4 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Freeman&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Freeman&family=Oswald:wght@200..700&display=swap");
+#root {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -136,6 +147,10 @@ nav ul li {
 }
 nav ul li a {
   color: #000;
+  transition: 0.2s ease-in;
+}
+nav ul li a:hover {
+  color: rgb(215, 70, 70);
 }
 nav ul li:hover {
   color: rgb(215, 70, 70);
@@ -331,20 +346,23 @@ option {
 }
 
 #CarList {
+  position: relative;
   margin-top: 50px;
   width: 100%;
-  min-height: 100%;
+  height: 0px;
   display: flex;
   flex-wrap: wrap;
-  padding: 50px 20px;
+  padding: 0px 20px;
+  padding-bottom: 50px;
   gap: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#CarList .carModel {
-  width: 350px;
-  height: 320px;
+
+.carModel {
+  width: 250px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -355,8 +373,14 @@ option {
   position: relative;
   border: 1px solid red;
   box-shadow: 2px 1px 10px solid red;
+  transition: 0.5s ease-in-out;
 }
-#CarList .carModel button {
+@media screen and (max-width: 378px) {
+  .carModel {
+    width: 100%;
+  }
+}
+.carModel button {
   position: absolute;
   right: 10px;
   bottom: 10px;
@@ -367,48 +391,92 @@ option {
   color: black;
   border: 0.2px solid red;
   cursor: pointer;
+  transition: 0.4s ease;
 }
-#CarList .carModel .cont {
-  width: 100%;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0px 10px;
+.carModel button:hover {
+  background-color: rgb(215, 70, 70);
 }
-#CarList .carModel h6 {
+.carModel button:hover > a {
+  color: white;
+}
+.carModel i {
+  position: absolute;
+  z-index: 20;
+  right: 10px;
+  bottom: 40%;
+  color: white;
+}
+.carModel h5 {
+  position: absolute;
+  z-index: 2;
+  bottom: 40%;
+  right: 35px;
+  color: rgb(215, 70, 70);
+}
+.carModel h6 {
   margin-left: 10px;
   margin-top: 10px;
 }
-#CarList .carModel h2 {
-  margin-top: 15px;
-}
-#CarList .carModel .info {
+.carModel h2 {
   position: absolute;
-  bottom: 10px;
+  z-index: 20;
+  background-color: white;
+  top: 10px;
+  font-size: 14px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  text-align: left;
+}
+.carModel .info {
+  position: absolute;
+  top: 50%;
+  z-index: 20;
   width: -moz-fit-content;
   width: fit-content;
   display: flex;
-  justify-content: center;
+  justify-content: start;
+  text-align: left;
+  flex-direction: column;
+  padding-top: 10px;
   align-items: center;
-  left: 10px;
+  left: 0px;
   gap: 10px;
 }
-#CarList .carModel h6 {
+.carModel a {
+  width: 100%;
+  height: 100%;
+  color: rgb(215, 70, 70);
+}
+.carModel h6 {
   font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 5;
+  background-color: rgb(215, 70, 70);
+  color: white;
 }
-#CarList .carModel h3 {
-  font-size: 14px;
+.carModel h3 {
+  font-size: 12px;
+  background-color: white;
+  padding: 10px 10px;
+  border-radius: 10px;
 }
-#CarList .carModel h4 {
-  font-size: 13px;
+.carModel h4 {
+  font-size: 12px;
+  position: absolute;
+  bottom: 15px;
+  left: 10px;
 }
 @media screen and (max-width: 378px) {
-  #CarList .carModel h4 {
+  .carModel h4 {
     font-size: 10px;
   }
 }
-#CarList .carModel img {
+.carModel img {
   pointer-events: none;
   width: 100.7%;
   border-top-left-radius: 10px;
@@ -417,6 +485,537 @@ option {
   top: 0;
   height: 61%;
   margin-top: -1px;
+}
+
+.ProductPage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  padding: 20px 80px;
+}
+@media screen and (max-width: 720px) {
+  .ProductPage {
+    padding: 20px 40px;
+  }
+}
+@media screen and (max-width: 378px) {
+  .ProductPage {
+    padding: 10px 5px;
+  }
+}
+
+#list {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 50px;
+}
+
+.productimg {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-image: url("../photos/modul.jpg");
+  background-attachment: fixed;
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 50px;
+}
+@media screen and (max-width: 720px) {
+  .productimg {
+    font-size: 30px;
+  }
+}
+@media screen and (max-width: 378px) {
+  .productimg {
+    font-size: 15px;
+  }
+}
+.productimg h1 {
+  z-index: 5;
+}
+
+.btnnext {
+  font-size: 30px;
+  font-family: sans-serif;
+  border-radius: 15px;
+  height: 60px;
+  cursor: pointer;
+  width: 100%;
+  background-color: rgb(215, 70, 70);
+  color: white;
+  border: none;
+  display: none;
+}
+
+.donebtn {
+  display: block;
+  font-family: "Oswald", sans-serif;
+  font-size: 50px;
+  padding-bottom: 80px;
+}
+@media screen and (max-width: 720px) {
+  .donebtn {
+    width: 350px;
+    height: 60px;
+    font-size: 30px;
+    padding: 0px;
+  }
+}
+@media screen and (max-width: 378px) {
+  .donebtn {
+    width: 80%;
+  }
+}
+
+.ProductPage {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.scrl {
+  display: none;
+}
+
+#scrl {
+  display: block;
+  background-color: rgb(215, 70, 70);
+  width: 50px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  height: 50px;
+  font-size: 30px;
+  font-weight: 900;
+  right: 20px;
+  bottom: 25px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  position: fixed;
+}
+@media screen and (max-width: 720px) {
+  #scrl {
+    right: 20px;
+  }
+}
+#scrl:hover {
+  background-color: rgb(205, 49, 49);
+}
+
+#overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4823529412);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 40px;
+  gap: 20px;
+}
+@media screen and (max-width: 926px) {
+  #overlay {
+    font-size: 25px;
+  }
+}
+@media screen and (max-width: 720px) {
+  #overlay {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 510px) {
+  #overlay {
+    font-size: 15px;
+  }
+}
+#overlay button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 60px;
+  background-color: white;
+  padding: 1px 15px;
+  border-radius: 30px;
+  color: rgb(215, 70, 70);
+  font-weight: 900;
+  cursor: pointer;
+}
+#overlay button a {
+  color: rgb(215, 70, 70);
+}
+@media screen and (max-width: 720px) {
+  #overlay button {
+    font-size: 30px;
+  }
+}
+@media screen and (max-width: 378px) {
+  #overlay button {
+    font-size: 27px;
+  }
+}
+
+#modal_photo {
+  background-image: url("../photos/bg.jpg");
+  z-index: 2;
+  position: relative;
+  margin-top: 70px;
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  -o-object-fit: contain;
+     object-fit: contain;
+  background-attachment: fixed;
+}
+@media screen and (max-width: 720px) {
+  #modal_photo {
+    height: 300px;
+  }
+}
+
+.loading {
+  transform: rotateZ(45deg);
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  perspective: 1000px;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  color: #ca2e2e;
+}
+.loading p {
+  transform: translateY(80px);
+}
+
+.loading:before,
+.loading:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  transform: rotateX(70deg);
+  animation: 1s spin linear infinite;
+}
+
+.loading:after {
+  color: #110805;
+  transform: rotateY(70deg);
+  animation-delay: 0.4s;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotateZ(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateZ(360deg);
+  }
+}
+@keyframes rotateccw {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+@keyframes spin {
+  0%, 100% {
+    box-shadow: 0.2em 0px 0 0px currentcolor;
+  }
+  12% {
+    box-shadow: 0.2em 0.2em 0 0 currentcolor;
+  }
+  25% {
+    box-shadow: 0 0.2em 0 0px currentcolor;
+  }
+  37% {
+    box-shadow: -0.2em 0.2em 0 0 currentcolor;
+  }
+  50% {
+    box-shadow: -0.2em 0 0 0 currentcolor;
+  }
+  62% {
+    box-shadow: -0.2em -0.2em 0 0 currentcolor;
+  }
+  75% {
+    box-shadow: 0px -0.2em 0 0 currentcolor;
+  }
+  87% {
+    box-shadow: 0.2em -0.2em 0 0 currentcolor;
+  }
+}
+#loaded {
+  display: none;
+}
+
+#CarmodelPage {
+  padding-bottom: 20px;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#CarmodelPage .info_box {
+  width: 100%;
+}
+#CarmodelPage .info_box h1 {
+  font-size: 35px;
+  font-family: "Freeman", sans-serif;
+  color: rgb(84, 84, 84);
+}
+@media screen and (max-width: 720px) {
+  #CarmodelPage .info_box h1 {
+    text-align: center;
+    font-size: 30px;
+  }
+}
+@media screen and (max-width: 926px) {
+  #CarmodelPage .info_box {
+    width: 100%;
+  }
+}
+#CarmodelPage .info_box .detail p {
+  margin-left: 10px;
+}
+#CarmodelPage .info_box .detail h2 {
+  font-size: 12px;
+  margin-left: 20px;
+}
+@media screen and (max-width: 720px) {
+  #CarmodelPage .info_box .detail {
+    justify-content: center;
+  }
+}
+#CarmodelPage .maincontent {
+  width: -moz-fit-content;
+  width: fit-content;
+  min-height: 100vh;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-direction: column;
+}
+@media screen and (max-width: 720px) {
+  #CarmodelPage .maincontent {
+    padding: 0px 5px;
+  }
+}
+#CarmodelPage .maincontent img {
+  width: 50vw;
+  height: 70vh;
+  border-radius: 10px;
+}
+@media screen and (max-width: 926px) {
+  #CarmodelPage .maincontent img {
+    width: 55vw;
+  }
+}
+@media screen and (max-width: 720px) {
+  #CarmodelPage .maincontent img {
+    width: 95vw;
+    padding: 0vw;
+    height: 40vh;
+  }
+}
+@media screen and (max-width: 926px) {
+  #CarmodelPage .maincontent {
+    width: 100%;
+  }
+}
+#CarmodelPage .maincontent .detail {
+  display: flex;
+  align-items: center;
+}
+#CarmodelPage .main_cont {
+  display: flex;
+  align-items: center;
+  height: 90%;
+  justify-content: center;
+  gap: 50px;
+}
+@media screen and (max-width: 1200px) {
+  #CarmodelPage .main_cont {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 720px) {
+  #CarmodelPage .main_cont {
+    flex-direction: column;
+    padding: 0px;
+  }
+}
+#CarmodelPage .main_cont h1 {
+  color: rgb(62, 61, 61);
+  top: 60px;
+  font-size: 50px;
+  font-family: sans-serif;
+}
+@media screen and (max-width: 720px) {
+  #CarmodelPage .main_cont h1 {
+    font-size: 40px;
+  }
+}
+#CarmodelPage .main_cont .users_info {
+  width: 20vw;
+  border-radius: 20px;
+  box-shadow: 2px 10px 10px 1px gray;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  padding: 0px 20px;
+  gap: 40px;
+}
+@media screen and (max-width: 1200px) {
+  #CarmodelPage .main_cont .users_info {
+    width: 30vw;
+  }
+}
+@media screen and (max-width: 926px) {
+  #CarmodelPage .main_cont .users_info {
+    width: 35vw;
+  }
+}
+@media screen and (max-width: 720px) {
+  #CarmodelPage .main_cont .users_info {
+    width: 100%;
+    gap: 20px;
+    height: 60vh;
+  }
+}
+#CarmodelPage .main_cont .users_info #tbc {
+  width: 100%;
+  height: 50px;
+  background-color: rgb(0, 173, 238);
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: 900;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0px 15px;
+  transition: 0.4s ease;
+  cursor: pointer;
+}
+#CarmodelPage .main_cont .users_info #tbc:hover {
+  background-color: rgb(2, 148, 201);
+}
+@media screen and (max-width: 720px) {
+  #CarmodelPage .main_cont .users_info #tbc {
+    justify-content: center;
+  }
+}
+#CarmodelPage .main_cont .users_info #tbcs {
+  width: 100%;
+  height: 70px;
+  background-color: #728cfb;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: 900;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0px 15px;
+  transition: 0.4s ease;
+  cursor: pointer;
+}
+#CarmodelPage .main_cont .users_info #tbcs:hover {
+  background-color: rgb(2, 148, 201);
+}
+#CarmodelPage .main_cont .users_info div {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+#CarmodelPage .main_cont .users_info div .user_inf {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 10px;
+  font-size: 14px;
+}
+#CarmodelPage .main_cont .users_info div .send_box {
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: 900;
+  font-size: 16px;
+  height: 70px;
+  border: 1px solid gray;
+  margin-top: 40px;
+  color: gray;
+  flex-direction: row;
+  justify-content: start;
+  padding-left: 15px;
+  gap: 10px;
+  display: flex;
+}
+#CarmodelPage .main_cont .users_info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+#CarmodelPage .desc_box {
+  width: 100%;
+  min-height: 10vh;
+  background-color: rgb(234, 232, 228);
+  border-radius: 10px;
+  color: #212121;
+  font-size: 12px;
+  padding: 10px;
+}
+@media screen and (max-width: 926px) {
+  #CarmodelPage .desc_box {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 720px) {
+  #CarmodelPage .desc_box h2 {
+    font-size: 14px;
+    padding: 5px;
+  }
 }
 
 @keyframes appear {

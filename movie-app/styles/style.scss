@@ -1,5 +1,7 @@
 @use "positions" as pos;
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Freeman&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Freeman&family=Oswald:wght@200..700&display=swap');
 
 $primary-red : rgb(215, 70, 70);
 
@@ -381,8 +383,8 @@ option {
 }
 
 .carModel {
-    width: 350px;
-    height: 320px;
+    width: 250px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -393,6 +395,11 @@ option {
     position: relative;
     border: 1px solid red;
     box-shadow: 2px 1px 10px solid red;
+    transition: .5s ease-in-out;
+
+    @include sm{
+        width: 100%;
+    }
 
     button {
         position: absolute;
@@ -405,17 +412,32 @@ option {
         color: black;
         border: .2px solid red;
         cursor: pointer;
+        transition: .4s ease;
+        &:hover{
+            background-color: $primary-red;
+        }
 
+        &:hover > a{
+            color: white;
+        }
+
+        
     }
 
+    i{
+        position: absolute;
+        z-index: 20;
+        right: 10px;
+        bottom: 40%;
+        color: white;
+    }
 
-    .cont {
-        width: 100%;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0px 10px;
+    h5{
+        position: absolute;
+        z-index: 2;
+        bottom: 40%;
+        right: 35px;
+        color: $primary-red;
     }
 
     h6 {
@@ -424,31 +446,64 @@ option {
     }
 
     h2 {
-        margin-top: 15px;
+        position: absolute;
+        z-index: 20;
+        background-color: white;
+        top: 10px;
+        font-size: 14px;
+        right: 10px;
+        padding: 5px 10px;
+        border-radius: 20px;
+        text-align: left;
     }
 
 
     .info {
         position: absolute;
-        bottom: 10px;
+        top: 50%;
+        z-index: 20;
         width: fit-content;
         display: flex;
-        justify-content: center;
+        justify-content: start;
+        text-align: left;
+        flex-direction: column;
+        padding-top: 10px;
         align-items: center;
-        left: 10px;
+        left: 0px;
         gap: 10px;
+    }
+
+    a{
+        width: 100%;
+        height: 100%;
+        color: $primary-red;
     }
 
     h6 {
         font-size: 20px;
+        padding: 5px 10px;
+        border-radius: 20px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: 5;
+        background-color: $primary-red;
+        color: white;
     }
 
     h3 {
-        font-size: 14px;
+        font-size: 12px;
+        background-color: white;
+        padding: 10px 10px;
+        border-radius: 10px;
+
     }
 
     h4 {
-        font-size: 13px;
+        font-size: 12px;
+        position: absolute;
+        bottom: 15px;
+        left: 10px;
 
         @include sm {
             font-size: 10px;
@@ -475,7 +530,14 @@ option {
     align-items: center;
     gap: 20px;
     padding-bottom: 20px;
-    padding: 20px 100px;
+    padding: 20px 80px;
+    @include md{
+        padding: 20px 40px;
+    }
+    @include sm{
+        padding: 10px 5px;
+    }
+
 }
 #list{
     width: 100%;
@@ -486,6 +548,30 @@ option {
     align-items: center;
     flex-wrap: wrap;
     padding-top: 50px;
+}
+
+.productimg{
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background-image: url('../photos/modul.jpg');
+    background-attachment: fixed;
+    object-fit: contain;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    @include pos.center;
+    color: white;
+    font-size: 50px;
+    @include md{
+        font-size: 30px;
+    }
+    @include sm{
+        font-size: 15px;
+    }
+    h1{
+        z-index: 5;
+    }
 }
 
 .btnnext{
@@ -503,6 +589,19 @@ option {
 
 .donebtn{
     display: block;
+    font-family: "Oswald", sans-serif;
+    font-size: 50px;
+    padding-bottom:80px;
+    @include md{
+        width: 350px;
+        height: 60px;
+        font-size: 30px;
+        padding: 0px;
+    }
+
+    @include sm{
+        width: 80%;
+    }
 }
 .ProductPage{
     width: 100%;
@@ -548,12 +647,15 @@ option {
     color: white;
     font-size: 40px;
     gap: 20px;
+    @include lg{
+        font-size: 25px;
+    }
 
     @include md{
         font-size: 20px;
     }
 
-    @include sm{
+    @include xmd{
         font-size: 15px;
     }
 
@@ -562,7 +664,9 @@ option {
         border: none;
         outline: none;
         font-size: 60px;
-        text-decoration: underline;
+        background-color: white;
+        padding: 1px 15px;
+        border-radius: 30px;
         color: $primary-red;
         font-weight: 900;
         cursor: pointer;
@@ -573,7 +677,7 @@ option {
             font-size: 30px;
         }
         @include sm{
-            font-size: 20px;
+            font-size: 27px;
         }
     }
 }
@@ -675,6 +779,229 @@ option {
 #loaded {
     display: none;
 }
+
+#CarmodelPage{
+    padding-bottom: 20px;
+    width: 100%;
+    min-height: 100vh;
+    @include pos.center;
+
+    .info_box{
+        width: 100%;
+        h1{
+            font-size: 35px;
+            font-family: "Freeman", sans-serif;
+            color: rgb(84, 84, 84);
+            @include md{
+                text-align: center;
+                font-size: 30px;
+            }
+
+        }
+        @include lg{
+            width: 100%;
+        }
+        .detail{
+            p{
+                margin-left: 10px;
+            }
+            h2{
+                font-size: 12px;
+                margin-left: 20px;
+            }
+            @include md{
+                justify-content: center;
+            }
+        }
+
+    }
+
+    .maincontent{
+        width: fit-content;
+        min-height: 100vh;
+        padding: 0px 20px;
+        @include pos.center;
+        gap: 20px;
+        flex-direction: column;
+        @include md{
+            padding: 0px 5px;
+        }
+        img{
+            width: 50vw;
+            height: 70vh;
+            border-radius: 10px;
+            @include lg{
+                width: 55vw ;
+            }
+            @include md{
+                width: 95vw;
+                padding: 0vw;
+                height: 40vh;
+            }
+        }
+        @include lg{
+            width: 100%;
+        }
+
+    .detail{
+        display: flex;
+        align-items: center;
+    }
+    }
+
+    .main_cont{
+        display: flex;
+        align-items: center;
+        height: 90%;
+        justify-content: center;
+        gap: 50px;
+        @include xl1400(){
+            padding: 0;
+        }
+        @include md{
+            flex-direction: column;
+            padding: 0px;
+        }
+        h1{
+            color: rgb(62, 61, 61);
+            top: 60px;
+            font-size: 50px;
+            font-family: sans-serif;
+            @include md{
+                font-size: 40px;
+            }
+        }
+        .users_info{
+            width: 20vw;
+            border-radius: 20px;
+            box-shadow: 2px 10px 10px 1px gray;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            padding: 0px 20px;
+            gap: 40px;
+            @include xl1400{
+                width: 30vw;
+            }
+            @include lg{
+                width:35vw;
+            }
+            @include md{
+                width: 100%;
+                gap: 20px;
+                height: 60vh;
+            }
+
+            #tbc{
+                width: 100%;
+                height: 50px;
+                background-color:  rgb(0 173 238 );
+                border-radius: 10px;
+                border: none;
+                color: white;
+                font-weight: 900;
+                font-size: 17px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                padding: 0px 15px;
+                transition: .4s ease;
+                cursor: pointer;
+                &:hover{
+                    background-color: rgb(2, 148, 201);
+                }
+                
+                @include md{
+                    justify-content: center;
+                }
+            }
+
+            #tbcs{
+                width: 100%;
+                height: 70px;
+                background-color:  #728cfb;
+                border-radius: 10px;
+                border: none;
+                color: white;
+                font-weight: 900;
+                font-size: 17px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                padding: 0px 15px;
+                transition: .4s ease;
+                cursor: pointer;
+                &:hover{
+                    background-color: rgb(2, 148, 201);
+                }
+                
+            }
+            div{
+                width: 100%;
+                height: 40%;
+                @include pos.center;
+                flex-direction: column;
+                .user_inf{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: start;
+                    gap: 10px;
+                    font-size: 14px;
+                }
+                .send_box{
+                    width: 100%;
+                    border-radius: 10px;
+                    border: none;
+                    color: white;
+                    font-weight: 900;
+                    font-size: 16px;
+                    height: 70px;
+                    border: 1px solid gray;
+                    margin-top: 40px;
+                    color: gray;
+                    flex-direction: row;
+                    justify-content: start;
+                    padding-left: 15px;
+                    gap: 10px;
+                    display: flex;
+                }
+                
+            }
+            img{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    .desc_box{
+        width: 100%;
+        min-height: 10vh;
+        background-color: rgb(234, 232, 228);
+        border-radius: 10px;
+        color: #212121;
+        font-size: 12px;
+        padding: 10px;
+        @include lg{
+            width: 100%;
+        }
+        h2{
+            @include md{
+                font-size: 14px;
+                padding: 5px;
+            }
+        }
+    }
+
+}
+
+
+
+
 @keyframes appear {
     0% {
         opacity: 0;
