@@ -3,6 +3,8 @@ import Contacts from "./scripts/pages/contact";
 import mainpage, { fetchBrendList } from "./scripts/pages/MainPage";
 import {getCurrentItem} from "./scripts/pages/CarId";
 import Products, { Productsfetch } from "./scripts/pages/Products";
+import CartPage from "./scripts/pages/Cart";
+import getdata from "./scripts/pages/Cart";
 
 const route = (event, destiny) => {
     event = event || window.event;
@@ -17,6 +19,7 @@ const routes = {
     "/about": About,
     "/products": Products,
     "/contact": Contacts,
+    '/cart' : CartPage,
 };
 
 const handleLocation = async () => {
@@ -26,14 +29,16 @@ const handleLocation = async () => {
     const mainPageElement = document.getElementById("root");
     console.log(path)
     if (path.includes('.') && path !== '/') {
-        getCurrentItem()
-        return mainPageElement.innerHTML = Card; 
+        return getCurrentItem()
     }
     if (path === '/') {
         mainPageElement.innerHTML = mainpage;
         fetchBrendList(); 
         return; 
-    } else {
+    }if(path == '/cart'){
+        getdata()
+    }
+    else {
         routeUrl = routes[routePath] || routes[404];
     }
     if (mainPageElement) {

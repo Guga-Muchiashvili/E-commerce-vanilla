@@ -89,7 +89,6 @@ export const Productsfetch = async (Page) => {
                     icon.classList.add('fa-eye')
                     let views = document.createElement('h5')
                     views.innerText = item.views
-                    console.log(icon)
                     mods[i]?.model_name ?  text = mods[i]?.model_name : text = 'unknown'
                     
                     date.innerText = item.order_date.split(' ')[0]

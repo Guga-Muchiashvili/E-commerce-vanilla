@@ -17,7 +17,6 @@ export const fetchBrends = async (brands) => {
 };
 
 export const fetchModels = async (manid) => {
-    console.log(manid)
     let id = typeof(manid) == 'string' || typeof(manid) == 'number' ? manid : manid.value
     const res = await fetch(`https://api2.myauto.ge/ka/getManModels?man_id=`+ id);
     const data = await res.json();
@@ -27,20 +26,32 @@ export const fetchModels = async (manid) => {
     
 }
 
-export const submitfetch = async (manid, model, type) => {
+export const submitfetch = async (manid, model, type, page) => {
+
     try {
-        let response
-        let data
+        let response;
+        let data;
         if (!model[0]?.value && isNaN(Number(manid))) {
             return window.alert('you have to fill every field');
         } else {
-            let mans = manid?.value;
-            let modelValue = model[0]?.value;
+            let mans 
+            if(!isNaN(Number(manid))){
+                mans = manid;
+            }else{
+                mans = manid?.value
+            }
+            let modelValue 
+            if(!isNaN(model)){
+                modelValue = model
+            }else{
+                modelValue = model[0]?.value;
+            }
             if (!isNaN(mans) && !isNaN(modelValue)) {
                 response = await axios.get('https://api2.myauto.ge/ka/products', {
                     params: {
                         Mans: `${mans}.${modelValue}`,
-                        ForRent: type ? (type.value == 0 ? "0" : "1") : ""
+                        ForRent: type ? (type.value == 0 ? "0" : "1") : "",
+                        Page: page 
                     }
                 });
             } else {
@@ -62,31 +73,3 @@ export const submitfetch = async (manid, model, type) => {
         console.error('Error fetching data:', error);
     }
 };
-
-// const setselector = () => {
-//     if (sel_manid && sel_model) {
-//         let input = document.getElementById('select_manid')
-//         let byn = document.getElementById('submit_button')
-//         input?.addEventListener('change', () => {
-//             fetchManId();
-//             sel_model[0].classList.add('enabled_select');
-//         });
-
-//         byn?.addEventListener('click', () => {
-//             submitfetch();
-//         });
-//     }
-
-//     if (carModelList && carModelList.length > 0) {
-//         let input = document.querySelector("#select_manid");
-//         carModelList.forEach((item) => {
-//             let optionBrend = item.man_name;
-//             const option = document.createElement('option');
-//             option.value = item.man_id;
-//             option.textContent = optionBrend;
-//             input?.appendChild(option);
-//         });
-//     } else {
-//         console.log('No brand data available.');
-//     }
-// };
