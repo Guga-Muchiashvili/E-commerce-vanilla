@@ -3,11 +3,6 @@ import { getdataLocal, setdatatoLocal } from "../actions/localstorage";
 let carData = null;
 let brand
 let model
-let views
-let order_date
-let car_id
-let photo
-let photo_ver
 
 const load = async () => {
     const path = window.location.pathname;
@@ -70,11 +65,12 @@ const initializeCard = async() => {
                                 <img src="./photos/tblg.png" alt="">
                                 აიღე სესხი 2 წუთში
                             </button>
-                            <button id="tbcs">
-                                ${isAlreadyAdded ? "უკვე დამატებულია" : `
-                                    <i class="fa-solid fa-cart-shopping" id="cart_a" style="color: white;"></i>
-                                    დაამატე კალათაში
-                                `}
+                            <button id="tbcs"}>
+                            ${isAlreadyAdded ? "" : '<a href="/cart"></a>'}
+                            ${isAlreadyAdded ? "უკვე დამატებულია" : `
+                                <i class="fa-solid fa-cart-shopping" id="cart_a" style="color: white;"></i>
+                                დაამატე კალათაში
+                            `}
                             </button>
                             <div>
                                 <div class="user_inf">

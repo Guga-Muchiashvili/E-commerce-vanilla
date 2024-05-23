@@ -1,6 +1,8 @@
 import { getdataLocal, removeDataLocal } from "../actions/localstorage";
 
-const CardPage = `<h1>Cart</h1>`;
+const CardPage = `<div id="CartPage"><div class="cartimg"><div id="overlay">
+<h1>Your Cars</h1>
+</div></div></div>`;
 
 let data
 
@@ -8,6 +10,9 @@ const getdata = async() => {
    const res = await getdataLocal()
     data = JSON.parse(res)
     document.getElementById('root').innerHTML = CardPage
+    const list =  document.createElement('div')
+    list.classList.add('cartList')
+    document.getElementById('root').appendChild(list)
 
     data?.forEach((item) => {
         let div = document.createElement('div');
@@ -54,9 +59,10 @@ const getdata = async() => {
             div.appendChild(img);
             div.append(views)
             div.appendChild(cont);
-        document.getElementById('root').appendChild(div)
+            list.appendChild(div)
 
 })
+    
 }
 getdata()
 

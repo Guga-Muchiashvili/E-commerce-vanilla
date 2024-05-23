@@ -4,7 +4,7 @@ import { FetchCarList } from "./MainPageActions";
 let carModelList
 let alldata
 
-export const fetchBrends = async (brands) => {
+export const fetchBrends = async () => {
     try {
         const res = await fetch('https://static.my.ge/myauto/js/mans.json');
         const data = await res.json();
