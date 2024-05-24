@@ -1,6 +1,7 @@
 import axios from "axios";
 import { fetchBrends, fetchModels } from "../actions/Fetch";
 import { getCurrentItem } from "./CarId";
+import { createSingleCardElement } from "../components/singelCard";
 
 
 let loading = true
@@ -72,53 +73,10 @@ export const Productsfetch = async (Page) => {
          if (data) {
             if (data.length >= 1) {
                 data?.forEach((item, i) => {
-                    let div = document.createElement('div');
-                    let inf = document.createElement('div');
-                    let img = document.createElement('img');
-                    let h2 = document.createElement('h2');
-                    let user = document.createElement('h3')
-                    let price = document.createElement('h6')
-                    let button = document.createElement('button')
-                    let cont = document.createElement('div')
-                    let date = document.createElement('h4')
-                    let text
-                    let icon = document.createElement('i')
-                    let a = document.createElement('a')
-                    a.setAttribute('href', `${String(item.man_id + '.' + item.model_id + "." + item.car_id)}`)
-                    icon.classList.add('fa-solid')
-                    icon.classList.add('fa-eye')
-                    let views = document.createElement('h5')
-                    views.innerText = item.views
-                    mods[i]?.model_name ?  text = mods[i]?.model_name : text = 'unknown'
-                    
-                    date.innerText = item.order_date.split(' ')[0]
-                    h2.innerText = text
-                    price.innerText = Math.round(item.price_usd) + "$"
-                    user.innerText = item.client_name
-                    a.innerHTML = "view more"
-                    cont.classList.add('cont')
-                    let src = `https://static.my.ge/myauto/photos/${item.photo}/thumbs/${item.car_id}_1.jpg?v=${item.photo_ver}`;
-                    img.src = src;
-                    div.classList.add('carModel')
-                    inf.classList.add('info')
-
-                    button.addEventListener('click', () => {
-                        route(event)
-                        getCurrentItem(item)
-                    })
-                    button.appendChild(a)
-                    cont.appendChild(h2)
-                    inf.appendChild(user)
-                    div.appendChild(date)
-                    cont.appendChild(price)
-                    div.append(inf)
-                    div.appendChild(icon)
-                    div.appendChild(button)
-                    div.appendChild(img);
-                    div.append(views)
-                    div.appendChild(cont);
-                    document.getElementById('list')?.appendChild(div)
-                })
+                    const cardElement = createSingleCardElement(item);
+                    document.getElementById('list').appendChild(cardElement);
+                });
+            
                
                 buttonnext = document.querySelector('.btnnext'); // Corrected selector
                 if (buttonnext) {
